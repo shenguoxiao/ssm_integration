@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.integration.dao.PersonMapper">
+    <insert id="addPerson" parameterType="com.ssm.integration.pojo.Person">
+        insert into t_person
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="person.id !=null ">
+                id,
+            </if>
+            <if test="person.name !=null and person.name !=''">
+                name,
+            </if>
+            <if test="person.age !=0" >
+                age,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="person.id !=null">
+                uuid(),
+            </if>
+            <if test="person.name !=null and person.name !=''">
+                #{person.name,jdbcType=VARCHAR,javaType=String},
+            </if>
+            <if test="person.age !=0" >
+                #{person.age,jdbcType=INTEGER,javaType=int},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="addTran1" parameterType="String">
+        insert into tran_1(id,name,create_time) values(uuid(),#{name},#{createTime,javaType=java.util.Date,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="addTran2" parameterType="String">
+        insert into tran_2(id,name,create_time) values(uuid(),#{name},#{createTime,javaType=java.util.Date,jdbcType=TIMESTAMP})
+    </insert>
+</mapper>
