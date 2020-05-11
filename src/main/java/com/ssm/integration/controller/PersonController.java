@@ -27,10 +27,13 @@ public class PersonController {
         Person person = new Person("24","shenguoxiao",24);
         boolean isDone = personService.addPerson(person);
         String message = "";
-        if(isDone)
-            message="add success!";
+        if(isDone) {
+            message = "add success!";
+        }
         else
+        {
             message = "add failure!";
+        }
         return message;
     }
     @ResponseBody
